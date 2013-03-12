@@ -19,10 +19,15 @@ helpers do
   end
 end
 
+connection = "postgres://localhost/boris_bike"
+DataMapper.setup(:default, connection)
+
+DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://localhost/borisbikes')
+DataMapper.finalize.auto_migrate!
 
 get '/' do
   # This will be your default route
-  # name = "Michelle"  
+  # name = "Michelle"
   # erb :index, :locals => {:name => name}
   erb :index
 end
